@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">MADCalculator</string>
+    <string name="char_c">C</string>
+    <string name="divide">/</string>
+    <string name="char_7">7</string>
+    <string name="char_8">8</string>
+    <string name="char_9">9</string>
+    <string name="multiply">X</string>
+    <string name="char_4">4</string>
+    <string name="char_5">5</string>
+    <string name="char_6">6</string>
+    <string name="minus">-</string>
+    <string name="char_1">1</string>
+    <string name="char_2">2</string>
+    <string name="char_3">3</string>
+    <string name="plus">+</string>
+    <string name="char_00">00</string>
+    <string name="char_0">0</string>
+    <string name="char_decimal">.</string>
+    <string name="equal">=</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="submit">Login</string>
+    <string name="hint_welcome_to_mad">Please login to get access to MAD calculator</string>
+    <string name="msg_enter_mail">Please enter email</string>
+    <string name="msg_enter_password">Please enter password</string>
+</resources>

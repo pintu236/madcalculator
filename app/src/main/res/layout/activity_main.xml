@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:id="@+id/calculationView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="bottom"
+        android:orientation="vertical"
+        android:padding="@dimen/padding_large"
+        app:layout_constraintBottom_toTopOf="@id/calcView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout"
+            style="@style/Theme.TextFilledBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:boxBackgroundMode="none"
+            app:hintEnabled="false">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputCalculator"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:focusableInTouchMode="true"
+                android:gravity="end"
+                android:hint="@string/app_name"
+                android:inputType="text"
+                android:textSize="@dimen/text_size_large" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/textCalculated"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginHorizontal="@dimen/margin_medium"
+            android:gravity="end"
+            android:textColor="@color/purple_500"
+            android:textSize="@dimen/text_size_large"
+            android:visibility="gone"
+            tools:text="2"
+            tools:visibility="visible" />
+    </LinearLayout>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/calcView"
+        style="@style/Theme.CustomCard"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:cardBackgroundColor="@color/colorCalcBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/calculationView">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/historyList"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="4"
+                tools:listitem="@layout/item_history" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="@dimen/margin_large">
+
+                <LinearLayout
+                    android:id="@+id/sectionA"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/operationClear"
+                        style="@style/Theme.ContainedButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/char_c"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <Space
+                        android:layout_width="@dimen/margin_medium"
+                        android:layout_height="wrap_content" />
+
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:id="@+id/operationHistory"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/ic_img_btn_bg"
+                        android:minHeight="@dimen/min_button_height"
+                        android:src="@drawable/ic_baseline_history_24"
+                        android:tint="@color/white"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <Space
+                        android:layout_width="@dimen/margin_medium"
+                        android:layout_height="wrap_content" />
+
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:id="@+id/operationUndo"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/ic_img_btn_bg"
+                        android:minHeight="@dimen/min_button_height"
+                        android:src="@drawable/ic_baseline_refresh_24"
+                        android:tint="@color/white"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <Space
+                        android:layout_width="@dimen/margin_medium"
+                        android:layout_height="wrap_content" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/operationDivide"
+                        style="@style/Theme.ContainedButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/divide"
+                        app:layout_constraintStart_toStartOf="parent" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/sectionB"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@id/sectionA">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/number7"
+                        style="@style/Theme.ContainedButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/char_7"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <Space
+                        android:layout_width="@dimen/margin_medium"
+                        android:layout_height="wrap_content" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/number8"
+                        style="@style/Theme.ContainedButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/char_8"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <Space
+                        android:layout_width="@dimen/margin_medium"
+                        android:layout_height="wrap_content" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/number9"
+                        style="@style/Theme.ContainedButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/char_9"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <Space
+                        android:layout_width="@dimen/margin_medium"
+                        android:layout_height="wrap_content" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/operationMultiply"
+                        style="@style/Theme.ContainedButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/multiply"
+                        app:layout_constraintStart_toStartOf="parent" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/sectionC"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@id/sectionB">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/number4"
+                        style="@style/Theme.ContainedButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/char_4"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <Space
+                        android:layout_width="@dimen/margin_medium"
+                        android:layout_height="wrap_content" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/number5"
+                        style="@style/Theme.ContainedButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/char_5"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <Space
+                        android:layout_width="@dimen/margin_medium"
+                        android:layout_height="wrap_content" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/number6"
+                        style="@style/Theme.ContainedButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/char_6"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <Space
+                        android:layout_width="@dimen/margin_medium"
+                        android:layout_height="wrap_content" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/operationMinus"
+                        style="@style/Theme.ContainedButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/minus"
+                        app:layout_constraintStart_toStartOf="parent" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/sectionD"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@id/sectionC">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/number1"
+                        style="@style/Theme.ContainedButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/char_1"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <Space
+                        android:layout_width="@dimen/margin_medium"
+                        android:layout_height="wrap_content" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/number2"
+                        style="@style/Theme.ContainedButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/char_2"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <Space
+                        android:layout_width="@dimen/margin_medium"
+                        android:layout_height="wrap_content" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/number3"
+                        style="@style/Theme.ContainedButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/char_3"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <Space
+                        android:layout_width="@dimen/margin_medium"
+                        android:layout_height="wrap_content" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/operationPlus"
+                        style="@style/Theme.ContainedButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/plus"
+                        app:layout_constraintStart_toStartOf="parent" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/sectionE"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@id/sectionD">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/number00"
+                        style="@style/Theme.ContainedButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/char_00"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <Space
+                        android:layout_width="@dimen/margin_medium"
+                        android:layout_height="wrap_content" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/number0"
+                        style="@style/Theme.ContainedButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/char_0"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+
+
+                    <Space
+                        android:layout_width="@dimen/margin_medium"
+                        android:layout_height="wrap_content" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/operationEqual"
+                        style="@style/Theme.ContainedButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/equal"
+                        app:layout_constraintStart_toStartOf="parent" />
+                </LinearLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
