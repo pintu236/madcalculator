@@ -14,6 +14,7 @@ class HistoryAdapter(val context: Context) : RecyclerView.Adapter<HistoryAdapter
     private val listOfHistory = mutableListOf<CalculationResult>()
 
     fun updateList(newList: MutableList<CalculationResult>) {
+        this.listOfHistory.clear()
         this.listOfHistory.addAll(newList);
         notifyDataSetChanged()
     }

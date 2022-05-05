@@ -7,6 +7,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
+import java.lang.Exception
 import java.util.*
 import kotlin.collections.HashMap
 
@@ -81,8 +82,8 @@ class MainViewModel : ViewModel() {
         doCalculation("")
         if (numbersStack.size == 1 && operationStack.size == 0) {
             val result = numbersStack.pop().toString();
-            operationLiveData.postValue(result);
             lastResultsStack.push(CalculationResult(text, result))
+            operationLiveData.postValue(result);
             //Write to db
             val mapOfResult = hashMapOf<String, Any>()
             var results = mutableListOf<CalculationResult>()
@@ -162,22 +163,26 @@ class MainViewModel : ViewModel() {
                 .get().addOnCompleteListener {
                     if (it.isSuccessful) {
                         val snapshotResult = it.result
-                        if (snapshotResult.exists()) {
-                            val mutableList =
-                                snapshotResult.data?.get("results") as MutableList<HashMap<String, Any>>;
-                            mutableList.forEach { result ->
-                                lastResultsStack.push(
-                                    CalculationResult(
-                                        result["input"].toString(),
-                                        result["result"].toString()
+                        if (snapshotResult.exists() && snapshotResult.data?.get("results") != null) {
+                            try {
+                                val mutableList =
+                                    snapshotResult.data?.get("results") as MutableList<HashMap<String, Any>>;
+                                mutableList.forEach { result ->
+                                    lastResultsStack.push(
+                                        CalculationResult(
+                                            result["input"].toString(),
+                                            result["result"].toString()
+                                        )
+                                    )
+                                }
+                                loggedInResultsLiveData.postValue(
+                                    NetworkResponse.success(
+                                        lastResultsStack
                                     )
                                 )
+                            } catch (e: Exception) {
+                                loggedInResultsLiveData.postValue(NetworkResponse.error(e.message))
                             }
-                            loggedInResultsLiveData.postValue(
-                                NetworkResponse.success(
-                                    lastResultsStack
-                                )
-                            )
                         } else {
                             loggedInResultsLiveData.postValue(NetworkResponse.error("No data"))
                         }
